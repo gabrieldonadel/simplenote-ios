@@ -143,6 +143,11 @@ private extension SPOnboardingViewController {
 private extension SPOnboardingViewController {
 
     @IBAction
+    func reactNativeWasPressed() {
+        presentReactNativeInterface()
+    }
+
+    @IBAction
     func signupWasPressed() {
         presentAuthenticationInterface(mode: .signup)
     }
@@ -160,6 +165,11 @@ private extension SPOnboardingViewController {
 
     func ensureNavigationBarIsHidden() {
         navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    func presentReactNativeInterface() {
+        let viewController = ReactNativeViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
     func presentAuthenticationInterface(mode: AuthenticationMode) {
