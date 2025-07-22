@@ -1,11 +1,38 @@
-# Simplenote for iOS
+# Simplenote + React Native
+
+This is an experimental fork of the original [Simplenote iOS app](https://github.com/Automattic/simplenote-ios) with the sole purpose of testing brownfield support for Expo and React Native in large native-first codebases. Its commits serve as a reference for anyone interested in integrating React Native into an existing iOS app, especially those that don't want to refactor the whole project structure to accommodate React Native.
+
+## Integration steps
+
+Check commits for detailed steps
+
+1. **Set up a yarn monorepo**: Create a `package.json` file in the root directory, then add the following to it:
+
+   ```json
+   {
+     "private": true,
+     "workspaces": ["exp"]
+   }
+   ```
+
+2. **Create the Expo app**: Run `npx create-expo-app exp` to set up a new Expo app.
+
+3. **Install dependencies**: Add expo to you Podfile and run `pod install`
+
+4. **Add React Native view**: Create a new Swift file in the `Simplenote` target, for example `ReactNativeView.swift`, and implement a basic React Native view.
+
+<details>
+<summary>Simplenote for iOS</summary>
+
+## Simplenote for iOS
+
 A Simplenote client for iOS. Learn more about Simplenote at [Simplenote.com](https://simplenote.com).
 
 ## Build Instructions
 
 ### Download Xcode
 
-At the moment *Simplenote for iOS* uses Swift 5 and requires Xcode 10.2 or newer. Xcode can be [downloaded from Apple](https://developer.apple.com/downloads/index.action).*
+At the moment _Simplenote for iOS_ uses Swift 5 and requires Xcode 10.2 or newer. Xcode can be [downloaded from Apple](https://developer.apple.com/downloads/index.action).\*
 
 ### Third party tools
 
@@ -34,22 +61,22 @@ This will ensure any dependencies are ready before launching Xcode.
 
 You can also open the project by double clicking on Simplenote.xcworkspace file, or launching Xcode and choose `File` > `Open` and browse to `Simplenote.xcworkspace`.
 
-Once you have opened Simpleonte iOS in Xcode, depending on your setup, you may need to make a few changes before you can build the app.  In Xcode hit `Command + B` and see if you get any errors.  
+Once you have opened Simpleonte iOS in Xcode, depending on your setup, you may need to make a few changes before you can build the app. In Xcode hit `Command + B` and see if you get any errors.
 
 ## Known Xcode Issues
 
-There are some common errors that can happen when first getting Simplenote iOS setup.  Check these instructions to see how to fix those.
+There are some common errors that can happen when first getting Simplenote iOS setup. Check these instructions to see how to fix those.
 
-If you see `The server SSH fingerprint failed to verify` before you can build Simplenote you will need to mark the app as trusted.  To do this, tap on the warning and hit Trust
+If you see `The server SSH fingerprint failed to verify` before you can build Simplenote you will need to mark the app as trusted. To do this, tap on the warning and hit Trust
 
-If the build fails with an `Authentication failed because the credentials were missing` error most likely you need to update the Swift Packages before being able to build the app. We use Swift Package Manager for some internal dependencies which can be found on Github.  To fetch these packages, connect Xcode to Github by going to Xcode > Preferences > Accounts, then enter your Github account details.  To be able to fetch these dependencies Xcode will need to be connected to a Github account via [SSH](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+If the build fails with an `Authentication failed because the credentials were missing` error most likely you need to update the Swift Packages before being able to build the app. We use Swift Package Manager for some internal dependencies which can be found on Github. To fetch these packages, connect Xcode to Github by going to Xcode > Preferences > Accounts, then enter your Github account details. To be able to fetch these dependencies Xcode will need to be connected to a Github account via [SSH](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
-Once you have trusted the app and the SPM packages are downloaded you should be able to build the app.  Try `Command + B` again and make sure that it builds correctly.
+Once you have trusted the app and the SPM packages are downloaded you should be able to build the app. Try `Command + B` again and make sure that it builds correctly.
 
 ## Setup Credentials
 
 Simplenote is powered by the [Simperium Sync'ing protocol](https://www.simperium.com). To be able to connect a development build of Simplenote iOS to the Simperium syncing service you will first need to setup app credentials.
-We distribute **testing credentials** that help us authenticate your application, and verify that the API calls being made are valid. 
+We distribute **testing credentials** that help us authenticate your application, and verify that the API calls being made are valid.
 
 Please copy the **testing Simperium credentials** as follows:
 
@@ -57,9 +84,9 @@ Please copy the **testing Simperium credentials** as follows:
 mkdir -p ~/.configure/simplenote-ios/secrets && cp Simplenote/SPCredentials-demo.swift ~/.configure/simplenote-ios/secrets/SPCredentials.swift
 ```
 
-This will copy the demo SPCredentials file into the correct directory with the basic details for an OSS contributor. Then edit the new `Simplenote/Credentials/SPCredentials.swift` file and change the `simperiumAppID` and `simperiumApiKey` fields to the correct values that appear in your Simperium app. If you don't see the file there, try doing a build by pressing `Command + B` and then restarting Xcode.  You should see it then.
+This will copy the demo SPCredentials file into the correct directory with the basic details for an OSS contributor. Then edit the new `Simplenote/Credentials/SPCredentials.swift` file and change the `simperiumAppID` and `simperiumApiKey` fields to the correct values that appear in your Simperium app. If you don't see the file there, try doing a build by pressing `Command + B` and then restarting Xcode. You should see it then.
 
-This will allow you to compile and run the app on a device or a simulator. With the app running in the simulator you can connect to Simplenote.  Note that for testing builds you can only connect to Simplenote account using the email address and password of your account on`Simperium.com`.  You can not connect to regular Simplenote accounts in development builds.
+This will allow you to compile and run the app on a device or a simulator. With the app running in the simulator you can connect to Simplenote. Note that for testing builds you can only connect to Simplenote account using the email address and password of your account on`Simperium.com`. You can not connect to regular Simplenote accounts in development builds.
 
 _Note: Simplenote API features such as sharing and publishing will not work with development builds._
 
@@ -87,3 +114,5 @@ Read our [Contributing Guide](CONTRIBUTING.md) to learn about reporting issues, 
 Simplenote for iOS is an Open Source project covered by the [GNU General Public License version 2](LICENSE.md).
 
 Happy noting!
+
+</details>
